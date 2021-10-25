@@ -1,9 +1,7 @@
 import React, {useState} from "react";
 import Post from "./Post";
 import {Box} from "@mui/material";
-import {styled} from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import {Grid} from "@mui/material";
+
 
 
 const PostLists = () => {
@@ -12,7 +10,7 @@ const PostLists = () => {
 
     async function getPostLists() {
         setIsLoading(true);
-        let resp = await fetch('https://dummyapi.io/data/v1/post/', {
+        let resp = await fetch('https://dummyapi.io/data/v1/post?page=1&limit=10', {
             headers: new Headers({
                 'app-id': '6171c456c5723b7c9e5da143',
             }),

@@ -7,6 +7,7 @@ import Post from "../PostLists/Post";
 const UsersList = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [responseObj, setResponseObj] = useState({});
+
     const getUsersList = () => {
         fetch('https://dummyapi.io/data/v1/user?page=1&limit=10', {
             headers: new Headers({

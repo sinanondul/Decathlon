@@ -10,8 +10,8 @@ const Item = styled(Paper)(({theme}) => ({
     height: 200,
     width: 300,
     padding: theme.spacing(1),
-    alignItems:"center",
-    justifyContent:"center",
+    alignItems: "center",
+    justifyContent: "center",
     textAlign: 'center',
     color: theme.palette.text.primary,
 }));
@@ -35,40 +35,37 @@ const Post = ({
     const [responseObj, setResponseObj] = useState({});
 
 
-
     React.useEffect(() => {
-        if (data && !isLoading) {
-            setItems(data.data);
-        }
+        setItems(data.data);
     }, [data])
 
-    if (!isLoading) {
+    if (!isLoading && items) {
         // debugger;
-        console.log("jdncfj", items)
+        console.log("jdncfj", items[0])
         return (
             <Grid container sx={{flexGrow: 1,}} justifyContent="center">
                 <Grid item xs={10}>
-                    {/*{items.map(item => (*/}
-                    <Grid container justifyContent="center" spacing={2} alignContent="center" >
-                        {Array.from(Array(10)).map(item => (
-                            <Grid item key={item} sx={{backgroundColor:"whitesmoke"}} justifyContent="center" alignContent="center" alignItems="center" /* item.id */ >
+                    {/*{Array.from(Array(10)).map(item => (*/}
+                    <Grid container justifyContent="center" spacing={2} alignContent="center">
+                        {items.map(item => (
+                            <Grid item key={item} sx={{backgroundColor: "whitesmoke"}} justifyContent="center"
+                                  alignContent="center" alignItems="center" /* item.id */ >
                                 <Item item>
-                                    {/*<Avatar alt="Remy Martin" src={item.owner.picture} / >*/}
-                                    <Grid container spacing={3} sx={{padding:1,}}>
-                                        <Grid item>
-                                            <Avatar>
 
-                                            </Avatar></Grid>
+                                    <Grid container spacing={3} sx={{padding: 1,}}>
+                                        <Grid item>
+                                            <Avatar alt="Remy Martin" src={item.picture}/>
+                                        </Grid>
                                         <Grid item>
                                             <Box justifyContent="center" alignContent="center"
                                                  sx={{height: 40, width: 200, backgroundColor: "steelblue"}}>
-                                                {/*{item.owner.firstName} {item.owner.lastName}*/}
-                                                Mehmet Zengin
+                                                {item.firstName} {item.lastName}
                                             </Box>
                                         </Grid>
                                     </Grid>
-                                    <Grid container direction="column" spacing={1} sx={{padding:1,}} >
-                                        <Grid item justifyContent="center" alignContent="center" alignItems="center" sx={{ textAlignlign: "center"}}>
+                                    <Grid container direction="column" spacing={1} sx={{padding: 1,}}>
+                                        <Grid item justifyContent="center" alignContent="center" alignItems="center"
+                                              sx={{textAlignlign: "center"}}>
                                             {/*<Photo style={{ alignSelf: 'center' }}></Photo>*/}
                                         </Grid>
                                         <Grid item>
