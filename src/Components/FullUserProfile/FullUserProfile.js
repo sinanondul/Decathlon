@@ -3,14 +3,14 @@ import ProfileCard from "./ProfileCard";
 import {CircularProgress} from "@mui/material";
 
 
-const FullUserProfile = () => {
-
+const FullUserProfile = ({id}) => {
+    const staticUserId = "60d0fe4f5311236168a109ca";
     const [responseObj, setResponseObj] = useState({});
     const [isLoading , setIsLoading] = useState(false)
 
     const getUser = () => {
         setIsLoading(true);
-        fetch('https://dummyapi.io/data/v1/user/60d0fe4f5311236168a109ca', {
+        fetch(`https://dummyapi.io/data/v1/user/${staticUserId}`, {
             headers: new Headers({
                 'app-id': '6171c456c5723b7c9e5da143',
             }),
@@ -33,12 +33,11 @@ const FullUserProfile = () => {
                 <div>
                     <ProfileCard data={responseObj} isLoading={isLoading} />
                 </div>
-                <button onClick={getUser}>Get User Profile</button>
             </div>
 
         )
     }else{
-        return (<CircularProgress></CircularProgress>);
+        return (<CircularProgress/>);
     }
 
 }

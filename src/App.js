@@ -16,6 +16,7 @@ import {
 import {Box} from "@mui/material";
 import FullUserProfile from "./Components/FullUserProfile/FullUserProfile";
 
+
 const routes = [
     {
         path: "/",
@@ -30,7 +31,7 @@ const routes = [
     },
     {
         path: "/user",
-        sidebar: () => <FullUserProfile/>,
+        sidebar: () => <FullUserProfile />,
         main: () => <h2>FullUser</h2>
     },
 ];
@@ -38,51 +39,59 @@ const routes = [
 function App() {
     return (
         <Router>
-        <div className="App">
-            <header className="App-header">
-                <h1>Decathlon Assessment App</h1>
-            </header>
-            <header className="secondaryHeader">
-                    <Grid sx={{flexDirection: "row"}} spacing={1}>
-                        <Button sx={{backgroundColor:"sienna",'&:hover': {
-                                backgroundColor: 'primary.main',
-                                opacity: [0.9, 0.8, 0.7],
-                            },}} >
+            <div className="App">
+                <header className="App-header">
+                    <h1>Decathlon Assessment App</h1>
+                </header>
+                <header className="secondaryHeader">
+                    <Grid container justifyContent="center" sx={{flexDirection: "row"}} spacing={2}>
+                        <Grid item><Button sx={{
+                            backgroundColor: "lightsteelblue", '&:hover': {
+                                backgroundColor: 'steelblue',
+                                // opacity: [0.9, 0.8, 0.7],
+                            },
+                        }}>
                             <Link to="/">Home</Link>
-                        </Button >
-                        <Button sx={{backgroundColor:"sienna",'&:hover': {
-                                backgroundColor: 'primary.main',
-                                opacity: [0.9, 0.8, 0.7],
-                            },}} >
+                        </Button></Grid>
+                        <Grid item> <Button sx={{
+                            backgroundColor: "lightsteelblue", '&:hover': {
+                                backgroundColor: 'steelblue',
+                                // opacity: [0.9, 0.8, 0.7],
+                            },
+                        }}>
                             <Link to="/Users">Users</Link>
-                        </Button>
-                        <Button sx={{backgroundColor:"sienna",'&:hover': {
-                                backgroundColor: 'primary.main',
-                                opacity: [0.9, 0.8, 0.7],
-                            },}} >
-                            <Link to="/user">Specific</Link>
-                        </Button>
+                        </Button></Grid>
+
+                        <Grid item>
+                            <Button sx={{
+                                backgroundColor: "lightsteelblue", '&:hover': {
+                                    backgroundColor: 'steelblue',
+                                },
+                            }}>
+                                <Link to="/user">Specific (Static User ID)</Link>
+                            </Button></Grid>
+
+
                     </Grid>
-            </header>
-            <main>
+                </header>
+                <main>
 
-                <Switch>
-                    {routes.map((route, index) => (
-                        <Route
-                            key={index}
-                            path={route.path}
-                            exact={route.exact}
-                            children={<route.sidebar/>}
-                        />
-                    ))}
-                </Switch>
+                    <Switch>
+                        {routes.map((route, index) => (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                exact={route.exact}
+                                children={<route.sidebar/>}
+                            />
+                        ))}
+                    </Switch>
 
-            </main>
-            <footer>Page Created By Sinan Öndül</footer>
+                </main>
+                <footer>Page Created By Sinan Öndül</footer>
 
-
-        </div>
-</Router>
+            </div>
+        </Router>
     );
 }
 

@@ -1,29 +1,33 @@
 import React from "react";
-import { Box, Grid} from "@mui/material";
+import {Box, Grid} from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import {styled} from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import SimpleMap from "../Maps/MapContainer";
+import moment from "moment";
 
 
 const Item = styled(Paper)(({theme}) => ({
     ...theme.typography.body2,
-    height: 300,
-    width: 600,
+    height: 350,
+    width: 900,
     color: theme.palette.text.secondary,
-    flexDirection:"row",
+    flexDirection: "row",
+    backgroundColor: "snow", '&:hover': {
+        backgroundColor: 'seashell',
+    },
 }));
 
 const ProfileCard = ({
                          data,
                          isLoading,
-                     }) =>{
+                     }) => {
 
     const [user, setUser] = React.useState({})
 
 
-
     React.useEffect(() => {
-        console.log("123123",data)
+        console.log("123123", data)
         setUser(data);
     }, [data])
 
@@ -31,47 +35,40 @@ const ProfileCard = ({
         // debugger;
         console.log("jdncfj", user)
         return (
-            <Grid container sx={{flexGrow: 1,backgroundColor:"rebeccapurple",}} justifyContent="center">
+            <Grid container sx={{flexGrow: 1, backgroundColor: "lightsteelblue",}} justifyContent="center">
                 <Grid item xs={9}>
-                    <Grid container justifyContent="center" alignContent="center" sx={{backgroundColor:"steelblue", paddingTop:"50px"}}>
-                            <Grid item key={user.id}  /* item.id */ >
-                                <Item>
-                                    <Grid>
-                                    <Grid item container spacing={3} sx={{padding:1,}}>
+                    <Grid container justifyContent="center" alignContent="center"
+                          >
+                        <Grid item key={user.id}  /* item.id */ >
+                            <Item>
+                                <Grid item container md={12} padding={2} justifyContent="flex-start" paddingTop="100">
+                                    <Grid item md={3} alignItems="center" >
+                                        <img style={{width: "100%", height: "100%"}} alt="Remy Sharp"
+                                             src={user.picture}/>
+                                    </Grid>
+                                    <Grid md={4} item container paddingLeft={2}>
+                                        <Grid>{user.id}</Grid>
+                                        <Grid item><b>{user.title.charAt(0).toUpperCase() + user.title.slice(1)}. {user.firstName} {user.lastName}</b></Grid>
+                                        <Grid item><b>Gender:</b> {user.gender}</Grid>
+                                        <Grid><b>Date of Birth:</b> {moment(user.dateOfBirth).format('ll',)} </Grid>
+                                        <Grid><b>Register Date: </b>{moment(user.registerDate).format('lll',)}</Grid>
+                                        <Grid><b>Email: </b>{user.email}</Grid>
+                                        <Grid><b>Phone:</b> {user.phone} </Grid>
+                                    </Grid>
+
+                                    <Grid item container md={4} paddingLeft={3}>
                                         <Grid item>
-                                            <img style={{width: "80%", height: "100%"}} alt="Remy Sharp" src={user.picture}/>
-                                                </Grid>
-                                        <Grid item>
-                                            <Box justifyContent="center" alignContent="center"
-                                                 sx={{height: 40, width: 200, backgroundColor: "steelblue"}}>
-                                                {user.title} {user.firstName} {user.lastName}
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box>Gender: {user.gender}</Box>
-                                            <Box>Date of Birth: {user.dateOfBirth} </Box>
-                                            <Box>Register Date: {user.registerDate}</Box>
-                                            <Box>Email: {user.email}</Box>
-                                            <Box>Phone: </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box>Address</Box>
-                                            <Box>State: {user.location.state}</Box>
-                                            <Box>Street: {user.location.street}</Box>
-                                            <Box>City: {user.location.city}</Box>
-                                            <Box>Country: {user.location.country}</Box>
+                                            <Box><b>Address:</b> {user.location.street}</Box>
+                                            <Box>{user.location.city} {user.location.state} {user.location.country} </Box>
                                             <Box>Timezone: {user.location.timezone}</Box>
                                         </Grid>
+                                        <Grid item sx={{border: 1}}>
+                                            <SimpleMap/>
+                                        </Grid>
                                     </Grid>
-                                    <Grid container spacing={3} sx={{padding:1,}}>
-
-                                    </Grid>
-                                    <Grid container spacing={3} sx={{padding:1,}}>
-
-                                    </Grid>
-                                    </Grid>
-                                </Item>
-                            </Grid>
+                                </Grid>
+                            </Item>
+                        </Grid>
 
                     </Grid>
                 </Grid>
@@ -81,7 +78,6 @@ const ProfileCard = ({
     } else {
         return (<CircularProgress color="info"/>)
     }
-
 
 
 }
