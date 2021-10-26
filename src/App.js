@@ -11,32 +11,15 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    useParams
 } from "react-router-dom";
 import {Box} from "@mui/material";
 import FullUserProfile from "./Components/FullUserProfile/FullUserProfile";
 
 
-const routes = [
-    {
-        path: "/",
-        exact: true,
-        sidebar: () => <PostsLists/>,
-        main: () => <div>Posts</div>
-    },
-    {
-        path: "/Users",
-        sidebar: () => <UsersList/>,
-        main: () => <h2>Users</h2>
-    },
-    {
-        path: "/user",
-        sidebar: () => <FullUserProfile />,
-        main: () => <h2>FullUser</h2>
-    },
-];
-
 function App() {
+
     return (
         <Router>
             <div className="App">
@@ -75,16 +58,15 @@ function App() {
                     </Grid>
                 </header>
                 <main>
-
                     <Switch>
-                        {routes.map((route, index) => (
-                            <Route
-                                key={index}
-                                path={route.path}
-                                exact={route.exact}
-                                children={<route.sidebar/>}
-                            />
-                        ))}
+                        <Route exact path="/">
+                            <PostsLists/>
+                        </Route>
+                        <Route path="/users">
+                            <UsersList/>
+                        </Route>
+                        <Route path="/user/:id" component={FullUserProfile}>
+                        </Route>
                     </Switch>
 
                 </main>

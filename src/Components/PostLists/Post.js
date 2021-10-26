@@ -32,15 +32,15 @@ const Post = ({
     console.log("Data", items)
     if (!isLoading && items) {
         return (
-            <Grid container sx={{flexGrow: 1,}} justifyContent="center">
+            <Grid container sx={{flexGrow: 1}} justifyContent="center">
                 <Grid item xs={10} onClick={() => <FullUserProfile/>}>
                     <Grid container justifyContent="center" spacing={2} alignContent="center">
                         {items.map(item => (
-                            <Grid item key={item} sx={{display: "flex"}}
+                            <Grid item key={item.owner.id} sx={{display: "flex"}}
                                   justifyContent="center" alignContent="center" alignItems="center" /* item.id */ >
                                 <Item item>
                                     {/*<Avatar alt="Remy Martin" src={item.owner.picture} / >*/}
-                                    <Grid container xs={12} spacing={4} sx={{padding: 2,}}>
+                                    <Grid container spacing={4} sx={{padding: 2,}}>
                                         <Grid item xs={2}>
                                             <Avatar alt="Remy Sharp" src={item.owner.picture}/>
                                         </Grid>

@@ -4,6 +4,7 @@ import {styled} from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import CircularProgress from '@mui/material/CircularProgress';
 import {useHistory} from 'react-router-dom';
+import FullUserProfile from "../FullUserProfile/FullUserProfile";
 
 const Item = styled(Paper)(({theme}) => ({
     ...theme.typography.body2,
@@ -13,7 +14,6 @@ const Item = styled(Paper)(({theme}) => ({
     alignItems: "center",
     justifyContent: "center",
     textAlign: 'center',
-    // color: theme.palette.text.primary, onho,
     backgroundColor: "snow", '&:hover': {
         backgroundColor: 'seashell',
     },
@@ -24,7 +24,12 @@ const Post = ({
                   isLoading,
               }) => {
     const history = useHistory();
-    const handleOnClick = useCallback(() => history.push('/user'), [history]);
+
+    const handleOnClick = (id) =>{
+        history.push({pathname: `/user/${id}`, state:{id: {id}}})
+
+        console.log(id);
+    }
     const [items, setItems] = React.useState({})
     const [responseObj, setResponseObj] = useState({});
 
@@ -34,17 +39,15 @@ const Post = ({
     }, [data])
 
     if (!isLoading && items) {
-        // debugger;
         console.log("here", items[0])
         return (
-            <Grid container sx={{flexGrow: 1,}} justifyContent="center">
+            <Grid container sx={{flexGrow: 1}} justifyContent="center">
                 <Grid item xs={10}>
-                    {/*{Array.from(Array(10)).map(item => (*/}
                     <Grid container justifyContent="center" spacing={2} alignContent="center">
                         {items.map(item => (
-                            <Grid item key={item} justifyContent="center"
+                            <Grid item key={item.id} justifyContent="center"
                                   alignContent="center" alignItems="center" /* item.id */ >
-                                <Item item onClick={handleOnClick}>
+                                <Item item onClick={() =>handleOnClick(item.id)}>
                                     <Grid container spacing={3} sx={{padding: 1,}}>
                                         <Grid item>
                                             <Avatar alt="Remy Martin" src={item.picture}/>

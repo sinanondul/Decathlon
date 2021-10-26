@@ -3,14 +3,17 @@ import ProfileCard from "./ProfileCard";
 import {CircularProgress} from "@mui/material";
 
 
-const FullUserProfile = ({id}) => {
+const FullUserProfile = ({match}) => {
     const staticUserId = "60d0fe4f5311236168a109ca";
+
+    console.log(match.params.id)
     const [responseObj, setResponseObj] = useState({});
     const [isLoading , setIsLoading] = useState(false)
+    console.log("hereisid", staticUserId);
 
     const getUser = () => {
         setIsLoading(true);
-        fetch(`https://dummyapi.io/data/v1/user/${staticUserId}`, {
+        fetch(`https://dummyapi.io/data/v1/user/${match.params.id}`, {
             headers: new Headers({
                 'app-id': '6171c456c5723b7c9e5da143',
             }),
@@ -21,7 +24,7 @@ const FullUserProfile = ({id}) => {
             }).then(setIsLoading(false))
             .then(console.log("inrequest",responseObj))
             .then(window.localStorage.setItem('user', responseObj))
-            console.log(window.localStorage.getItem('user'))
+
     }
     React.useEffect(() =>{
         getUser();
