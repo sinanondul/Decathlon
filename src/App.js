@@ -5,7 +5,7 @@ import PostsLists from "./Components/PostLists/PostsLists";
 import UsersList from "./Components/UsersList/UsersList";
 import {Button, Grid} from "@mui/material";
 import {ButtonGroup} from "@mui/material";
-
+import {Pagination} from "@mui/material";
 
 import {
     BrowserRouter as Router,
@@ -30,7 +30,7 @@ function App() {
                     <Grid container justifyContent="center" sx={{flexDirection: "row"}} spacing={2}>
                         <Grid item><Button sx={{
                             backgroundColor: "#F5D547", '&:hover': {
-                                backgroundColor: '#2B4162',
+                                backgroundColor: '#EDBBB4',
                                 // opacity: [0.9, 0.8, 0.7],
                             },
                         }}>
@@ -38,12 +38,14 @@ function App() {
                         </Button></Grid>
                         <Grid item> <Button sx={{
                             backgroundColor: "#F5D547", '&:hover': {
-                                backgroundColor: '#2B4162',
+                                backgroundColor: '#EDBBB4',
                                 // opacity: [0.9, 0.8, 0.7],
                             },
                         }}>
                             <Link to="/Users">Users</Link>
-                        </Button></Grid>
+                        </Button>
+                        </Grid>
+
 
                         {/*<Grid item>*/}
                         {/*    <Button sx={{*/}
@@ -57,6 +59,7 @@ function App() {
 
                     </Grid>
                 </header>
+
                 <main>
                     <Switch>
                         <Route exact path="/">

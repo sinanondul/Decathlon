@@ -19,7 +19,7 @@
   /*min-height: 100vh;*/
 }
 .secondaryHeader {
-  background-image: linear-gradient(90deg, rgb(2 0 0) 60%, purple);
+  background-image: linear-gradient(90deg, rgb(360 360 360) 60%, purple);
   display:flex;
   height: 5px;
   justify-content: center;
