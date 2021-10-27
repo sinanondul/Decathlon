@@ -53,8 +53,8 @@ const Post = ({
                                             <Avatar alt="Remy Martin" src={item.picture}/>
                                         </Grid>
                                         <Grid item>
-                                            <Grid container justifyContent="center" alignContent="center"
-                                                 sx={{height: 40, width: 200, backgroundColor: "linen"}}>
+                                            <Grid container border={1} justifyContent="center" alignContent="center"
+                                                 sx={{height: 40, width: 200, backgroundColor: "#F5D547"}}>
                                                 <b>{item.title.charAt(0).toUpperCase() + item.title.slice(1)}. {item.firstName} {item.lastName}</b>
                                             </Grid>
                                         </Grid>

@@ -23,36 +23,36 @@ function App() {
     return (
         <Router>
             <div className="App">
-                <header className="App-header">
-                    <h1>Decathlon Assessment App</h1>
-                </header>
+                {/*<header className="App-header">*/}
+                {/*    <h1>Decathlon Assessment App</h1>*/}
+                {/*</header>*/}
                 <header className="secondaryHeader">
                     <Grid container justifyContent="center" sx={{flexDirection: "row"}} spacing={2}>
                         <Grid item><Button sx={{
-                            backgroundColor: "lightsteelblue", '&:hover': {
-                                backgroundColor: 'steelblue',
+                            backgroundColor: "#F5D547", '&:hover': {
+                                backgroundColor: '#2B4162',
                                 // opacity: [0.9, 0.8, 0.7],
                             },
                         }}>
                             <Link to="/">Home</Link>
                         </Button></Grid>
                         <Grid item> <Button sx={{
-                            backgroundColor: "lightsteelblue", '&:hover': {
-                                backgroundColor: 'steelblue',
+                            backgroundColor: "#F5D547", '&:hover': {
+                                backgroundColor: '#2B4162',
                                 // opacity: [0.9, 0.8, 0.7],
                             },
                         }}>
                             <Link to="/Users">Users</Link>
                         </Button></Grid>
 
-                        <Grid item>
-                            <Button sx={{
-                                backgroundColor: "lightsteelblue", '&:hover': {
-                                    backgroundColor: 'steelblue',
-                                },
-                            }}>
-                                <Link to="/user">Specific (Static User ID)</Link>
-                            </Button></Grid>
+                        {/*<Grid item>*/}
+                        {/*    <Button sx={{*/}
+                        {/*        backgroundColor: "lightsteelblue", '&:hover': {*/}
+                        {/*            backgroundColor: 'steelblue',*/}
+                        {/*        },*/}
+                        {/*    }}>*/}
+                        {/*        <Link to="/user">Specific (Static User ID)</Link>*/}
+                        {/*    </Button></Grid>*/}
 
 
                     </Grid>

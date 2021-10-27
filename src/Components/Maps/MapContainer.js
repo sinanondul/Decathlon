@@ -1,31 +1,93 @@
-import React from "react";
-import GoogleMapReact from 'google-map-react';
+/*global google*/
+import React, { Component } from 'react';
+import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const mapStyles = {
+    width: '20%',
+    height: '25%'
+};
 
-export default function SimpleMap(){
-    const defaultProps = {
+export class MapContainer extends Component {
+    constructor(props) {
+        super(props);
+    }
+    state = {
+        showingInfoWindow: false, // Hides or shows the InfoWindow
+        activeMarker: {}, // Shows the active marker upon click
+        selectedPlace: {},
+        markerName: "Vendor XYZ's Location",
         center: {
-            lat: 10.99835602,
-            lng: 77.01502627
-        },
-        zoom: 11
+            lat: -1.2884,
+            lng: 36.8233
+        }
     };
 
-    return (
-        // Important! Always set the container height explicitly
-        <div style={{ height: '30vh', width: '40vh' }}>
-            <GoogleMapReact
-                bootstrapURLKeys={{ key: "AIzaSyDA5VrteLCP4gxDp-4rrm7skuejwcPUUc0" }}
-                defaultCenter={defaultProps.center}
-                defaultZoom={defaultProps.zoom}
+    componentDidMount = () => {
+        const country = this.props.country;
+        const city = this.props.city;
+        const state= this.props.state;
+        const street = this.props.street;
+        const addr = country + " " + state + " " + city + " " + street;
+        console.log(addr);
+        //Geocoding services
+        const geocoder = new google.maps.Geocoder();
+        const address = `${addr}` ;
+        geocoder.geocode({ address: address }, (results, status) => {
+            if (status === 'OK') {
+                this.setState({
+                    center: results[0].geometry.location,
+                    markerName: results[0].formatted_address
+                });
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    };
+    onMarkerClick = (props, marker, e) => {
+        console.log(props);
+        this.setState({
+            selectedPlace: props,
+            activeMarker: marker,
+            showingInfoWindow: true
+        });
+    };
+
+    onClose = props => {
+        if (this.state.showingInfoWindow) {
+            this.setState({
+                showingInfoWindow: false,
+                activeMarker: null
+            });
+        }
+    };
+    render() {
+        return (
+            <Map
+                google={this.props.google}
+                zoom={14}
+                style={mapStyles}
+                initialCenter={this.state.center}
+                center={this.state.center}
             >
-                <AnyReactComponent
-                    lat={59.955413}
-                    lng={30.337844}
-                    text="My Marker"
+                <Marker
+                    position={this.state.center}
+                    onClick={this.onMarkerClick}
+                    name={this.state.markerName}
                 />
-            </GoogleMapReact>
-        </div>
-    );
+                <InfoWindow
+                    marker={this.state.activeMarker}
+                    visible={this.state.showingInfoWindow}
+                    onClose={this.onClose}
+                >
+                    <div>
+                        <h4>{this.state.selectedPlace.name}</h4>
+                    </div>
+                </InfoWindow>
+            </Map>
+        );
+    }
 }
+
+export default GoogleApiWrapper({
+    apiKey: 'AIzaSyDA5VrteLCP4gxDp-4rrm7skuejwcPUUc0'
+})(MapContainer);

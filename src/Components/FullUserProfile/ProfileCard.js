@@ -35,7 +35,7 @@ const ProfileCard = ({
         // debugger;
         console.log("jdncfj", user)
         return (
-            <Grid container sx={{flexGrow: 1, backgroundColor: "lightsteelblue",}} justifyContent="center">
+            <Grid container sx={{flexGrow: 1, backgroundColor: "#"}} justifyContent="center">
                 <Grid item xs={9}>
                     <Grid container justifyContent="center" alignContent="center"
                           >
@@ -57,13 +57,15 @@ const ProfileCard = ({
                                     </Grid>
 
                                     <Grid item container md={4} paddingLeft={3}>
+
                                         <Grid item>
                                             <Box><b>Address:</b> {user.location.street}</Box>
                                             <Box>{user.location.city} {user.location.state} {user.location.country} </Box>
                                             <Box>Timezone: {user.location.timezone}</Box>
-                                        </Grid>
-                                        <Grid item sx={{border: 1}}>
-                                            <SimpleMap/>
+                                            <SimpleMap street={user.location.street} city={user.location.city}
+                                                       state={user.location.state}
+                                                       country={user.location.country}
+                                            />
                                         </Grid>
                                     </Grid>
                                 </Grid>
